@@ -64,16 +64,11 @@ public class Deploy {
 		 */
 		try {
 			log.info("Attaching to cluster");
-			
-			String uiPublicAddress = "";
-			if (getUINode(config, newNodes) != null)
-				uiPublicAddress = getUINode(config, newNodes).getPublicAddresses().iterator().next();
-			
 			Storm.writeStormAttachConfigFiles(
 					getNewInstancesPublicIp(config, "ZK", newNodes), 
 					getNewInstancesPublicIp(config, "WORKER", newNodes), 
-					getNimbusNode(config, newNodes).getPublicAddresses().iterator().next(),
-					uiPublicAddress, 
+					Tools.getInstanceIp(getNimbusNode(config, newNodes)),
+					(getUINode(config, newNodes) == null) ? "" : Tools.getInstanceIp(getUINode(config, newNodes)), 
 					clustername);
 		} catch (IOException ex) {
 			log.error("Problem attaching to cluster", ex);
@@ -92,8 +87,8 @@ public class Deploy {
 							config, 
 							getNewInstancesPrivateIp(config, "ZK", newNodes), 
 							getNewInstancesPrivateIp(config, "DRPC", newNodes), 
-							getNimbusNode(config, newNodes).getPrivateAddresses().iterator().next(), 
-							getUINode(config, newNodes).getPrivateAddresses().iterator().next()),
+							Tools.getInstanceIp(getNimbusNode(config, newNodes)), 
+							Tools.getInstanceIp(getUINode(config, newNodes))),
 					true,
 					clustername, 
 					computeContext.getComputeService(),
@@ -116,9 +111,9 @@ public class Deploy {
 		log.info("User: " + config.getImageUsername());
 		log.info("Started:");
 		for (NodeMetadata n : newNodes.values())
-			log.info("\t" + n.getPublicAddresses().iterator().next() + "\t" + n.getUserMetadata().get("daemons").toString());
-		log.info("Storm UI: http://" + getUINode(config, newNodes).getPublicAddresses().iterator().next() + ":8080");
-		log.info("Ganglia UI: http://" + getUINode(config, newNodes).getPublicAddresses().iterator().next() + "/ganglia");
+			log.info("\t" + Tools.getInstanceIp(n) + "\t" + n.getUserMetadata().get("daemons").toString());
+		log.info("Storm UI: http://" + Tools.getInstanceIp(getUINode(config, newNodes)) + ":8080");
+		log.info("Ganglia UI: http://" + Tools.getInstanceIp(getUINode(config, newNodes)) + "/ganglia");
 		
 		/**
 		 * Close application now
@@ -150,7 +145,7 @@ public class Deploy {
 		for (int nodeid : nodeIds) {
 			NodeMetadata n = nodes.get(nodeid);
 			if (n.getUserMetadata().containsKey("daemons") && n.getUserMetadata().get("daemons").contains(daemon))
-				newNodes.add(n.getPublicAddresses().iterator().next());
+				newNodes.add(Tools.getInstanceIp(n));
 		}
 		return newNodes;
 	}

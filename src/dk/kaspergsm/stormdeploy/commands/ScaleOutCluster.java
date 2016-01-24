@@ -101,7 +101,7 @@ public class ScaleOutCluster {
 		log.info("User: " + config.getImageUsername());
 		log.info("Started:");
 		for (NodeMetadata n : newWorkerNodes)
-			log.info("\t" + n.getPublicAddresses().iterator().next() + "\t" + "[WORKER]");
+			log.info("\t" + Tools.getInstanceIp(n) + "\t" + "[WORKER]");
 		
 		
 		/**

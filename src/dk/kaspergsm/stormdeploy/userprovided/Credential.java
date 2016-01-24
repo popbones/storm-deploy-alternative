@@ -16,7 +16,11 @@ public class Credential {
 	private static Logger log = LoggerFactory.getLogger(Credential.class);
 	private String _x509pkPathEC2 = null, _x509certPathEC2 = null;
 	private String _identityEC2 = null, _credentialEC2 = null;
-		
+	
+	public Credential() {
+		// For overwriting by eventual subclasses
+	}
+	
 	public Credential(File f) {
 		HashMap<String, Object> credentials = Tools.readYamlConf(f);
 		if (credentials == null || credentials.size() == 0) {

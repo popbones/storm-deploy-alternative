@@ -23,6 +23,7 @@ import org.jclouds.compute.ComputeService;
 import org.jclouds.compute.ComputeServiceContext;
 import org.jclouds.compute.RunScriptOnNodesException;
 import org.jclouds.compute.config.ComputeServiceProperties;
+import org.jclouds.compute.domain.NodeMetadata;
 import org.jclouds.compute.options.RunScriptOptions;
 import org.jclouds.compute.predicates.NodePredicates;
 import org.jclouds.domain.LoginCredentials;
@@ -245,5 +246,23 @@ public class Tools {
 	
 	public static Statement execOnUI(String cmd) {
 		return exec("case $(head -n 1 ~/daemons) in *UI*) " + cmd + " ;; esac");
+	}
+	
+	public static String getInstanceIp(NodeMetadata node) {
+		if (node.getPublicAddresses().size() > 0) {
+			return node.getPublicAddresses().iterator().next();
+		} else if (node.getPrivateAddresses().size() > 0) {
+			return node.getPrivateAddresses().iterator().next();
+		} else {
+			log.warn("No ip was found");
+			return null;
+		}
+	}
+	
+	public static List<String> getInstancesIp(ArrayList<NodeMetadata> nodes) {
+		ArrayList<String> newNodes = new ArrayList<String>();
+		for (NodeMetadata n : nodes)
+			newNodes.add(getInstanceIp(n));			
+		return newNodes;
 	}
 }
