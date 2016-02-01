@@ -10,7 +10,7 @@ _Please don't hesitate to contact me. Your feedback will help to further improve
 + Automatically sets up [Ganglia](http://ganglia.sourceforge.net/), making it easy to monitor performance
 + Automatically sets up [Amazon EC2 AMI Tools](http://docs.aws.amazon.com/AWSEC2/latest/CommandLineReference/ami-tools.html) on new nodes
 + Supports Zookeeper versions: _3.4.5_ & _3.4.6_
-+ Supports Storm versions: _0.8.2_ & _0.9.0.1_ & _0.9.2_ & _0.9.3_ & _0.9.4_ & _0.9.5_
++ Supports Storm versions: _0.8.2_ & _0.9.0.1_ & _0.9.2_ & _0.9.3_ & _0.9.4_ & _0.9.5_ & _0.10.0_ 
 
 ## Configuration
 This tool, requires two configurationfiles: `conf/credential.yaml` and `conf/configuration.yaml`. Put your credentials into the file `conf/credential.yaml`. It's required that you have generated an SSH key-pair in `~/.ssh` with an empty pass phrase.

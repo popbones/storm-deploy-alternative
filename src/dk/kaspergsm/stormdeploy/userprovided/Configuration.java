@@ -176,7 +176,7 @@ public class Configuration {
 		} else if (version.equals("0.9.5")) {
 			return "https://s3-eu-west-1.amazonaws.com/storm-releases/apache-storm-0.9.5.tar.gz";
 		} else if (version.equals("0.10.0")) {
-                       return "http://mirror.vorboss.net/apache/storm/apache-storm-0.10.0/apache-storm-0.10.0.tar.gz";
+			return "https://s3-eu-west-1.amazonaws.com/storm-releases/apache-storm-0.10.0.tar.gz";
 		} else {
 			log.info("Storm version " + version + " not currently supported!");
 		}
