@@ -29,10 +29,22 @@ public class Credential {
 		}
 		
 		// Parse ec2 credentials
-		if (credentials.containsKey("ec2-identity"))
+		if (credentials.containsKey("ec2-identity")) {
 			_identityEC2 = (String)credentials.get("ec2-identity");
-		if (credentials.containsKey("ec2-credential"))
+			if (_identityEC2.startsWith(" ") || _identityEC2.endsWith(" ")) {
+				log.error("EC2 identity cannot start or end with a space");
+				System.exit(0);
+			}
+		}
+			
+		if (credentials.containsKey("ec2-credential")) {
 			_credentialEC2 = (String)credentials.get("ec2-credential");
+			if (_credentialEC2.startsWith(" ") || _credentialEC2.endsWith(" ")) {
+				log.error("EC2 credential cannot start or end with a space");
+				System.exit(0);
+			}
+		}
+		
 		if ((_identityEC2 == null && _credentialEC2 != null) || (_identityEC2 != null && _credentialEC2 == null)) {
 			log.error("Incomplete credentials for Amazon EC2");
 			System.exit(0);
