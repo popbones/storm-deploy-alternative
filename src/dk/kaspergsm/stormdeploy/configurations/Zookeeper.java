@@ -18,7 +18,7 @@ public class Zookeeper {
 	}
 
 	public static List<Statement> configure(List<String> zkNodesHostnames) {
-		ArrayList<Statement> st = new ArrayList<Statement>();
+		List<Statement> st = new ArrayList<Statement>();
 		StringBuilder sb = new StringBuilder();
 		for (int i = 1; i <= zkNodesHostnames.size(); i++) {
 			sb.append("server.");
@@ -39,7 +39,7 @@ public class Zookeeper {
 	}
 	
 	public static List<Statement> writeZKMyIds(String username, Integer zkid) {
-		ArrayList<Statement> st = new ArrayList<Statement>();
+		List<Statement> st = new ArrayList<Statement>();
 		st.add(exec("mkdir -p /tmp/zktmp"));												// ensure folders exist
 		st.add(exec("chown " + username + " /tmp/zktmp"));
 		st.add(exec("echo " + zkid + " > /tmp/zktmp/myid"));								// write myid
@@ -50,7 +50,7 @@ public class Zookeeper {
 	 * Uses Monitor to restart daemon, if it stops
 	 */
 	public static List<Statement> startDaemonSupervision(String username) {
-		ArrayList<Statement> st = new ArrayList<Statement>();
+		List<Statement> st = new ArrayList<Statement>();
 		st.add(exec("cd ~"));
 		st.add(exec("su -c 'case $(head -n 1 ~/daemons) in *ZK*) java -cp \"sda/storm-deploy-alternative.jar\" dk.kaspergsm.stormdeploy.image.ProcessMonitor org.apache.zookeeper.server zookeeper/bin/zkServer.sh start ;; esac &' - " + username));
 		return st;

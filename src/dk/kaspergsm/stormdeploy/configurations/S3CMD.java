@@ -20,7 +20,7 @@ public class S3CMD {
 	private static Logger log = LoggerFactory.getLogger(S3CMD.class);
 	
 	public static List<Statement> install(PACKAGE_MANAGER pm) {
-		ArrayList<Statement> st = new ArrayList<Statement>();
+		List<Statement> st = new ArrayList<Statement>();
 		if (pm == PACKAGE_MANAGER.APT) {
 			st.add(exec("wget -O- -q http://s3tools.org/repo/deb-all/stable/s3tools.key | apt-key add -"));
 			st.add(exec("wget -O/etc/apt/sources.list.d/s3tools.list http://s3tools.org/repo/deb-all/stable/s3tools.list"));
@@ -39,7 +39,7 @@ public class S3CMD {
 	 * The approach taken here, is to write a default version.
 	 */
 	public static List<Statement> configure(String identity, String credential) {
-		ArrayList<Statement> st = new ArrayList<Statement>();
+		List<Statement> st = new ArrayList<Statement>();
 		st.add(exec("cd ~"));
 		st.add(exec("rm .s3cfg"));
 		st.add(exec("touch .s3cfg"));

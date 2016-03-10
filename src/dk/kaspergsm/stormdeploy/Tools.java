@@ -179,7 +179,7 @@ public class Tools {
 	 * Run set of custom commands
 	 */
 	public static List<Statement> runCustomCommands(List<String> commands) {
-		ArrayList<Statement> st = new ArrayList<Statement>();
+		List<Statement> st = new ArrayList<Statement>();
 		for (String command : commands)
 			st.add(exec(command));
 		return st;
@@ -189,7 +189,7 @@ public class Tools {
 	 * Used to read local file, and echo into remote file
 	 */
 	public static List<Statement> echoFile(String localPath, String remotePath) {
-		ArrayList<Statement> st = new ArrayList<Statement>();
+		List<Statement> st = new ArrayList<Statement>();
 		for (String l : readFile(localPath).split("\n"))
 			st.add(exec("echo '" + l + "' >> " + remotePath));
 		return st;
@@ -204,7 +204,7 @@ public class Tools {
 	 * RemotePath should always be downloadable by wget
 	 */
 	public static List<Statement> download(String localPath, String remotePath, boolean extract, boolean delete, String finalName) {
-		ArrayList<Statement> st = new ArrayList<Statement>();
+		List<Statement> st = new ArrayList<Statement>();
 		st.add(exec("cd " + localPath));
 		
 		// Extract filename
@@ -259,8 +259,8 @@ public class Tools {
 		}
 	}
 	
-	public static List<String> getInstancesIp(ArrayList<NodeMetadata> nodes) {
-		ArrayList<String> newNodes = new ArrayList<String>();
+	public static List<String> getInstancesIp(List<NodeMetadata> nodes) {
+		List<String> newNodes = new ArrayList<String>();
 		for (NodeMetadata n : nodes)
 			newNodes.add(getInstanceIp(n));			
 		return newNodes;

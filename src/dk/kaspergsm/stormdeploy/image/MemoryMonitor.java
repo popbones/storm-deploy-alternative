@@ -8,6 +8,7 @@ import java.lang.management.ManagementFactory;
 import java.lang.management.MemoryMXBean;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import javax.management.remote.JMXConnector;
 import javax.management.remote.JMXConnectorFactory;
 import javax.management.remote.JMXServiceURL;
@@ -131,8 +132,8 @@ class MemoryMonitor {
 	}
 	
 	
-	private static ArrayList<String>  getAllJavaProcesses() {
-		ArrayList<String> javaProcesses = new ArrayList<String>();
+	private static List<String> getAllJavaProcesses() {
+		List<String> javaProcesses = new ArrayList<String>();
 		try {
 			ProcessBuilder pb = new ProcessBuilder(Arrays.asList("jps"));
 			Process process = pb.start();

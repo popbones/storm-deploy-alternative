@@ -5,7 +5,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import dk.kaspergsm.stormdeploy.Tools;
@@ -19,9 +23,9 @@ public class Configuration {
 	private static Logger log = LoggerFactory.getLogger(Configuration.class);
 	HashMap<Integer, String> _nodeIdToInstanceTypeID = null;
 	private String _imageID = null, _locationID = null;
-	private ArrayList<String> _conf;
+	private List<String> _conf;
 	
-	private HashSet<String> _allConfigurationSettings = new HashSet<String>(Arrays.asList(
+	private Set<String> _allConfigurationSettings = new HashSet<String>(Arrays.asList(
 			"storm-version", 
 			"zk-version",
 			"image","image-username",
@@ -58,7 +62,7 @@ public class Configuration {
 	/**
 	 * Get exec (pre config)
 	 */
-	public ArrayList<String> getRemoteExecPreConfig() {
+	public List<String> getRemoteExecPreConfig() {
 		ArrayList<String> execPreConfig = new ArrayList<String>();
 		for (int i = 0; i < _conf.size(); i++) {
 			String key = _conf.get(i).substring(0, _conf.get(i).indexOf(" "));
@@ -73,7 +77,7 @@ public class Configuration {
 	/**
 	 * Get exec (post config)
 	 */
-	public ArrayList<String> getRemoteExecPostConfig() {
+	public List<String> getRemoteExecPostConfig() {
 		ArrayList<String> execPostConfig = new ArrayList<String>();
 		for (int i = 0; i < _conf.size(); i++) {
 			String key = _conf.get(i).substring(0, _conf.get(i).indexOf(" "));
@@ -208,7 +212,7 @@ public class Configuration {
 	/**
 	 * Get map{node id, instanceType}
 	 */
-	public HashMap<Integer, String> getNodeIdToInstanceType() {
+	public Map<Integer, String> getNodeIdToInstanceType() {
 		if (_nodeIdToInstanceTypeID != null) {
 			return _nodeIdToInstanceTypeID;
 		}
@@ -229,7 +233,7 @@ public class Configuration {
 	/**
 	 * Get map{node id, zkid}
 	 */
-	public HashMap<Integer, Integer> getNodeIdToZkId() {
+	public Map<Integer, Integer> getNodeIdToZkId() {
 		int zkid = 1;
 		HashMap<Integer, Integer> nodeIdToZkId = new HashMap<Integer, Integer>();
 		for (int nodeId = 0; nodeId < _conf.size(); nodeId++) {
@@ -247,8 +251,8 @@ public class Configuration {
 	/**
 	 * Get map{arr[daemons], arr[node ids]}
 	 */
-	public HashMap<ArrayList<String>, ArrayList<Integer>> getDaemonsToNodeIds() {
-		HashMap<String, ArrayList<Integer>> deamonsToNodeIds = new HashMap<String, ArrayList<Integer>>();
+	public Map<ArrayList<String>, ArrayList<Integer>> getDaemonsToNodeIds() {
+		Map<String, ArrayList<Integer>> deamonsToNodeIds = new HashMap<String, ArrayList<Integer>>();
 		for (int i = 0; i < _conf.size(); i++) {
 			if (_allConfigurationSettings.contains(_conf.get(i).substring(0, _conf.get(i).indexOf(" "))))
 				continue;

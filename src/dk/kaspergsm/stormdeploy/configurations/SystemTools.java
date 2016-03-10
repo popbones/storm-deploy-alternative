@@ -20,7 +20,7 @@ public class SystemTools {
 	private static Logger log = LoggerFactory.getLogger(SystemTools.class);
 	
 	public static List<Statement> init(PACKAGE_MANAGER pm) {
-		ArrayList<Statement> st = new ArrayList<Statement>();
+		List<Statement> st = new ArrayList<Statement>();
 		if (pm == PACKAGE_MANAGER.APT) {
 			
 			// Enable multiverse

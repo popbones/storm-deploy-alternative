@@ -16,7 +16,7 @@ public class ZeroMQ {
 	private static String _condJzmq = "$(find /usr/* -name 'zmq.jar' | wc -l) -eq 0";
 	
 	public static List<Statement> download() {
-		ArrayList<Statement> st = new ArrayList<Statement>();
+		List<Statement> st = new ArrayList<Statement>();
 		st.add(exec(Tools.conditionalExec(_condZmq, "cd ~")));
 		st.add(exec(Tools.conditionalExec(_condZmq, "wget http://download.zeromq.org/zeromq-2.1.7.tar.gz")));
 		st.add(exec(Tools.conditionalExec(_condZmq, "tar -zxf zeromq-2.1.7.tar.gz")));
@@ -24,8 +24,8 @@ public class ZeroMQ {
 		return st;
 	}
 	
-	public static ArrayList<Statement> configure() {
-		ArrayList<Statement> st = new ArrayList<Statement>();
+	public static List<Statement> configure() {
+		List<Statement> st = new ArrayList<Statement>();
 		st.add(exec(Tools.conditionalExec(_condZmq, "cd zeromq-2.1.7")));
 		st.add(exec(Tools.conditionalExec(_condZmq, "./configure")));
 		st.add(exec(Tools.conditionalExec(_condZmq, "make")));
