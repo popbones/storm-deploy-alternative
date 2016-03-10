@@ -59,7 +59,7 @@ public class ProcessMonitor {
         BufferedReader i = new BufferedReader(new InputStreamReader(p.getInputStream()));
         
         // read the output from the command
-        String s = null;
+        String s;
         while ((s = i.readLine()) != null) {
         	if (s.contains(_process) && !s.contains("storm-deploy-alternative.jar")) // filter the monitoring process
         		return true;

@@ -67,7 +67,7 @@ public class LaunchNodeThread extends Thread {
 		// Create initScript
 		_initScript = new ArrayList<Statement>();
 		_initScript.add(exec("echo \"" + daemons.toString() + "\" > ~/daemons"));
-		_initScript.add(exec("echo \"" + instanceType.toString() + "\" > ~/.instance-type"));
+		_initScript.add(exec("echo \"" + instanceType + "\" > ~/.instance-type"));
 		if (zkMyId != null)
 			_initScript.addAll(Zookeeper.writeZKMyIds(_username, zkMyId));
 

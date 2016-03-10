@@ -124,7 +124,7 @@ public class ScaleOutCluster {
 			// Create initScript
 			ArrayList<Statement> initScript = new ArrayList<Statement>();
 			initScript.add(exec("echo WORKER > ~/daemons"));
-			initScript.add(exec("echo \"" + instanceType.toString() + "\" > ~/.instance-type"));
+			initScript.add(exec("echo \"" + instanceType + "\" > ~/.instance-type"));
 			initScript.addAll(commands);
 			
 			log.info("Starting " + numInstances + " instance(s) of type " + instanceType);
