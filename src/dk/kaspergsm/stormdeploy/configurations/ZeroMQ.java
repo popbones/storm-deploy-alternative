@@ -14,7 +14,10 @@ import dk.kaspergsm.stormdeploy.Tools;
 public class ZeroMQ {
 	private static String _condZmq = "$(find /usr/* -name 'libzmq.a' | wc -l) -eq 0";
 	private static String _condJzmq = "$(find /usr/* -name 'zmq.jar' | wc -l) -eq 0";
-	
+
+	private ZeroMQ() {
+	}
+
 	public static List<Statement> download() {
 		ArrayList<Statement> st = new ArrayList<Statement>();
 		st.add(exec(Tools.conditionalExec(_condZmq, "cd ~")));

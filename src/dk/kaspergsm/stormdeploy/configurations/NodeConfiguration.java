@@ -13,7 +13,10 @@ import dk.kaspergsm.stormdeploy.userprovided.Credential;
  * @author Kasper Grud Skat Madsen
  */
 public class NodeConfiguration {
-	
+
+	private NodeConfiguration() {
+	}
+
 	public static List<Statement> getCommands(String clustername, Credential credentials, Configuration config, List<String> zookeeperHostnames, List<String> drpcHostnames, String nimbusHostname, String uiHostname) {
 		List<Statement> commands = new ArrayList<Statement>();
 		

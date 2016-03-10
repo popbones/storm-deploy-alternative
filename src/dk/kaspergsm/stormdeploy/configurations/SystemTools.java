@@ -16,6 +16,9 @@ import org.slf4j.LoggerFactory;
  * @author Kasper Grud Skat Madsen
  */
 public class SystemTools {
+	private SystemTools() {
+	}
+
 	public enum PACKAGE_MANAGER {APT};	
 	private static Logger log = LoggerFactory.getLogger(SystemTools.class);
 	

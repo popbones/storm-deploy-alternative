@@ -20,7 +20,10 @@ public class ProcessMonitor {
 	private static String[] _toExec;
 	private static String _process;
 	private static Timer t;
-	
+
+	private ProcessMonitor() {
+	}
+
 	public static void main(String[] args) {
 		// Expected args
 		// 1. Process id to check

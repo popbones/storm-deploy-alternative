@@ -16,7 +16,10 @@ import dk.kaspergsm.stormdeploy.configurations.SystemTools.PACKAGE_MANAGER;
  */
 public class EC2Tools {
 	private static Logger log = LoggerFactory.getLogger(EC2Tools.class);
-	
+
+	private EC2Tools() {
+	}
+
 	public static List<Statement> install(PACKAGE_MANAGER pm) {
 		ArrayList<Statement> st = new ArrayList<Statement>();
 		if (pm == PACKAGE_MANAGER.APT) {
