@@ -36,7 +36,7 @@ public class ScaleOutCluster {
 		 * Parse current running nodes for cluster
 		 */
 		ArrayList<NodeMetadata> existingZookeeper = new ArrayList<NodeMetadata>();
-		ArrayList<NodeMetadata> existingWorkers = new ArrayList<NodeMetadata>();
+		List<NodeMetadata> existingWorkers = new ArrayList<NodeMetadata>();
 		ArrayList<NodeMetadata> existingDRPC = new ArrayList<NodeMetadata>();
 		NodeMetadata nimbus = null, ui = null;
 		String image = null, region = null;
@@ -110,8 +110,8 @@ public class ScaleOutCluster {
 		System.exit(0);
 	}
 	
-	private static List<String> getInstancesPrivateIp(ArrayList<NodeMetadata> nodes) {
-		ArrayList<String> newNodes = new ArrayList<String>();
+	private static List<String> getInstancesPrivateIp(List<NodeMetadata> nodes) {
+		List<String> newNodes = new ArrayList<String>();
 		for (NodeMetadata n : nodes)
 			newNodes.add(n.getPrivateAddresses().iterator().next());
 		return newNodes;

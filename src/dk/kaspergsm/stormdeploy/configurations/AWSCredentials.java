@@ -4,6 +4,7 @@ import static org.jclouds.scriptbuilder.domain.Statements.exec;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.jclouds.scriptbuilder.domain.Statement;
 
@@ -11,7 +12,7 @@ public class AWSCredentials {
 
 	// This is lame.  Should really use IAM roles instead!!
 	public static Collection<Statement> configure(String region, String key, String secret) {
-		ArrayList<Statement> st = new ArrayList<Statement>();
+		List<Statement> st = new ArrayList<Statement>();
 		
 		// Add AWS credentials to env so AWS API can create credentials.
 		st.add(exec("echo \"export AWS_ACCESS_KEY_ID=" + key + "\" >> ~/.bashrc"));

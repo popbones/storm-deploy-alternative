@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
 import java.util.concurrent.ExecutionException;
@@ -121,7 +123,7 @@ public class Deploy {
 		System.exit(0);
 	}
 	
-	private static NodeMetadata getNimbusNode(Configuration config, HashMap<Integer, NodeMetadata> nodes) {
+	private static NodeMetadata getNimbusNode(Configuration config, Map<Integer, NodeMetadata> nodes) {
 		for (NodeMetadata n : nodes.values()) {
 			if (n.getUserMetadata().containsKey("daemons") && n.getUserMetadata().get("daemons").contains("MASTER"))
 				return n;
@@ -129,7 +131,7 @@ public class Deploy {
 		return null;
 	}
 	
-	private static NodeMetadata getUINode(Configuration config, HashMap<Integer, NodeMetadata> nodes) {
+	private static NodeMetadata getUINode(Configuration config, Map<Integer, NodeMetadata> nodes) {
 		for (NodeMetadata n : nodes.values()) {
 			if (n.getUserMetadata().containsKey("daemons") && n.getUserMetadata().get("daemons").contains("UI"))
 				return n;
@@ -137,8 +139,8 @@ public class Deploy {
 		return null;
 	}
 	
-	private static ArrayList<String> getNewInstancesPublicIp(Configuration config, String daemon, HashMap<Integer, NodeMetadata> nodes) {
-		ArrayList<Integer> nodeIds = new ArrayList<Integer>(nodes.keySet());
+	private static List<String> getNewInstancesPublicIp(Configuration config, String daemon, Map<Integer, NodeMetadata> nodes) {
+		List<Integer> nodeIds = new ArrayList<Integer>(nodes.keySet());
 		Collections.sort(nodeIds);
 		
 		ArrayList<String> newNodes = new ArrayList<String>();
@@ -150,8 +152,8 @@ public class Deploy {
 		return newNodes;
 	}
 	
-	private static ArrayList<String> getNewInstancesPrivateIp(Configuration config, String daemon, HashMap<Integer, NodeMetadata> nodes) {
-		ArrayList<Integer> nodeIds = new ArrayList<Integer>(nodes.keySet());
+	private static List<String> getNewInstancesPrivateIp(Configuration config, String daemon, Map<Integer, NodeMetadata> nodes) {
+		List<Integer> nodeIds = new ArrayList<Integer>(nodes.keySet());
 		Collections.sort(nodeIds);
 		
 		ArrayList<String> newNodes = new ArrayList<String>();
@@ -166,7 +168,7 @@ public class Deploy {
 	private static HashMap<Integer, NodeMetadata> startNodesNow(Configuration config, ComputeService compute, String clustername) {	
 
 		// To maintain worker threads
-		ArrayList<LaunchNodeThread> workerThreads = new ArrayList<LaunchNodeThread>();
+		List<LaunchNodeThread> workerThreads = new ArrayList<LaunchNodeThread>();
 				
 		/**
 		 * Loop each unique set of daemons
@@ -174,7 +176,7 @@ public class Deploy {
 		for (Entry<ArrayList<String>, ArrayList<Integer>> daemonsToNodeIds : config.getDaemonsToNodeIds().entrySet()) {
 			
 			// Create instanceType -> List[nodeIds]
-			HashMap<String, ArrayList<Integer>> instanceTypeToNodeIdsToStart = new HashMap<String, ArrayList<Integer>>();
+			Map<String, ArrayList<Integer>> instanceTypeToNodeIdsToStart = new HashMap<String, ArrayList<Integer>>();
 			for (Integer nodeId : daemonsToNodeIds.getValue()) {
 				String curInstanceType = config.getNodeIdToInstanceType().get(nodeId);
 				if (!instanceTypeToNodeIdsToStart.containsKey(curInstanceType))

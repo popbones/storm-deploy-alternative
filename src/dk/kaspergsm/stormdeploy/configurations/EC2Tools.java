@@ -18,7 +18,7 @@ public class EC2Tools {
 	private static Logger log = LoggerFactory.getLogger(EC2Tools.class);
 	
 	public static List<Statement> install(PACKAGE_MANAGER pm) {
-		ArrayList<Statement> st = new ArrayList<Statement>();
+		List<Statement> st = new ArrayList<Statement>();
 		if (pm == PACKAGE_MANAGER.APT) {
 			st.add(exec("apt-get install ec2-api-tools"));
 			return st;
@@ -32,7 +32,7 @@ public class EC2Tools {
 	 * Returns commands to configure credentials
 	 */
 	public static List<Statement> configure(String certPath, String privPath, String region, String jobname) {
-		ArrayList<Statement> st = new ArrayList<Statement>();
+		List<Statement> st = new ArrayList<Statement>();
 		
 		// Write credentials
 		st.add(exec("mkdir ~/.ec2"));

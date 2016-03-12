@@ -17,7 +17,7 @@ public class Ganglia {
 	 * Install Ganglia
 	 */
 	public static List<Statement> install() {
-		ArrayList<Statement> st = new ArrayList<Statement>();
+		List<Statement> st = new ArrayList<Statement>();
 		
 		// Install monitoring base
 		st.add(exec("apt-get install -y ganglia-monitor gmetad rrdtool librrds-perl librrd-dev"));
@@ -36,7 +36,7 @@ public class Ganglia {
 	 * Configure Ganglia
 	 */
 	public static List<Statement> configure(String clustername, String uiHostname) {
-		ArrayList<Statement> st = new ArrayList<Statement>();
+		List<Statement> st = new ArrayList<Statement>();
 		
 		// Strip top of configurationfile
 		st.add(exec("sed \'1,/Each metrics module that is referenced/d\' /etc/ganglia/gmond.conf > /etc/ganglia/stripped_gmond.conf"));
@@ -69,7 +69,7 @@ public class Ganglia {
 	 * Start daemons
 	 */
 	public static List<Statement> start() {
-		ArrayList<Statement> st = new ArrayList<Statement>();
+		List<Statement> st = new ArrayList<Statement>();
 		
 		// In case node is containing UI, it should enable module_rewrite for apache2
 		st.add(Tools.execOnUI("a2enmod rewrite"));
