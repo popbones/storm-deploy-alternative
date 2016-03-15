@@ -158,8 +158,9 @@ public class Tools {
 	
 	private static String readFile(String filePath) {
 		StringBuffer fileData = new StringBuffer(1000);
+		BufferedReader reader = null;
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader(filePath));
+			reader = new BufferedReader(new FileReader(filePath));
 			char[] buf = new char[1024];
 			int numRead;
 			while ((numRead = reader.read(buf)) != -1) {
@@ -167,9 +168,16 @@ public class Tools {
 				fileData.append(readData);
 				buf = new char[1024];
 			}
-			reader.close();
+			
 		} catch (Exception ex) {
 			System.out.println(ex.toString());
+		} finally {
+			if(reader != null)
+			try {
+				reader.close();
+			} catch (IOException e) {
+				log.error("Error while reading file", e);
+			}
 		}
 		return fileData.toString();
 	}

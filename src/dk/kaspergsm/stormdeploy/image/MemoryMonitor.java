@@ -182,16 +182,16 @@ class MemoryMonitor {
 			ManagementFactory.newPlatformMXBeanProxy(connector.getMBeanServerConnection(), ManagementFactory.MEMORY_MXBEAN_NAME, MemoryMXBean.class).gc();			
 		} catch (Exception ex) {
 			log.error("Problem", ex);
-		}
-
-		// Detach from JVM process
-		try {
-			if (connector != null)
-				connector.close();
-			if (vm != null)
-				vm.detach();
-		} catch (Exception ex) {
-			log.error("Problem", ex);
+		} finally {
+			// Detach from JVM process
+			try {
+				if (connector != null)
+					connector.close();
+				if (vm != null)
+					vm.detach();
+			} catch (Exception ex) {
+				log.error("Problem", ex);
+			}
 		}
 	}
 }
