@@ -13,6 +13,9 @@ import dk.kaspergsm.stormdeploy.Tools;
  */
 public class Zookeeper {
 
+	private Zookeeper() {
+	}
+
 	public static List<Statement> download(String zookeeperRemoteLocation) {
 		return Tools.download("~/", zookeeperRemoteLocation, true, true, "zookeeper");
 	}

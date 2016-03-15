@@ -28,7 +28,10 @@ import com.sun.tools.attach.VirtualMachine;
  */
 class MemoryMonitor {
 	private static Logger log = LoggerFactory.getLogger(MemoryMonitor.class);
-	
+
+	private MemoryMonitor() {
+	}
+
 	public static void main(String[] args) throws IOException {
 		log.info("Initialized MemoryMonitor");
 		log.info("Software for helping Java proceses share memory");

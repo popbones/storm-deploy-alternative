@@ -18,7 +18,10 @@ import dk.kaspergsm.stormdeploy.configurations.SystemTools.PACKAGE_MANAGER;
 public class S3CMD {
 	private static Random r = new Random();
 	private static Logger log = LoggerFactory.getLogger(S3CMD.class);
-	
+
+	private S3CMD() {
+	}
+
 	public static List<Statement> install(PACKAGE_MANAGER pm) {
 		List<Statement> st = new ArrayList<Statement>();
 		if (pm == PACKAGE_MANAGER.APT) {
